@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://c1mvlmqh655rm"]
+
+[ext_resource type="Script" uid="uid://dh76qkntxhfu0" path="res://addons/multiplayer_shortcuts/scenes/panel_shortcuts.gd" id="1_kp6dd"]
+
+[node name="PanelShortcuts" type="PopupPanel" unique_id=929357549]
+oversampling_override = 1.0
+size = Vector2i(308, 84)
+visible = true
+extend_to_title = true
+script = ExtResource("1_kp6dd")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1664620742]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBocContainer" type="VBoxContainer" parent="MarginContainer" unique_id=504688683]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBocContainer" unique_id=567193107]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBocContainer/HBoxContainer" unique_id=152628116]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Instances"
+
+[node name="InstancesCount" type="SpinBox" parent="MarginContainer/VBocContainer/HBoxContainer" unique_id=993195644]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 5.0
+value = 2.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBocContainer" unique_id=1124160103]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBocContainer/HBoxContainer2" unique_id=981961084]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Net Mode"
+
+[node name="NetModeOptions" type="OptionButton" parent="MarginContainer/VBocContainer/HBoxContainer2" unique_id=914598082]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 3
+popup/item_0/text = "Standalone"
+popup/item_0/id = 0
+popup/item_1/text = "Listen Server"
+popup/item_1/id = 1
+popup/item_2/text = "Client"
+popup/item_2/id = 2
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="value_changed" from="MarginContainer/VBocContainer/HBoxContainer/InstancesCount" to="." method="_on_spin_box_value_changed"]
+[connection signal="item_selected" from="MarginContainer/VBocContainer/HBoxContainer2/NetModeOptions" to="." method="_on_net_mode_options_item_selected"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkp6som2rqyuo"]
+
+[ext_resource type="Script" uid="uid://moqy8mfn1qmg" path="res://addons/multiplayer_shortcuts/scenes/button_shortcuts.gd" id="1_3mift"]
+
+[node name="ButtonShortcuts" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = ">"
+script = ExtResource("1_3mift")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

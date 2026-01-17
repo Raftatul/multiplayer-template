@@ -1,0 +1,116 @@
+[gd_scene load_steps=2 format=3 uid="uid://bccc5i86a0w34"]
+
+[ext_resource type="Script" uid="uid://6wy8y8tlcc3e" path="res://src/menu.gd" id="1_t5igk"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t5igk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -278.0
+offset_right = 330.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+current_tab = 0
+
+[node name="ENET" type="VBoxContainer" parent="HBoxContainer/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_tab_index = 0
+
+[node name="Button_Create" type="Button" parent="HBoxContainer/TabContainer/ENET"]
+layout_mode = 2
+text = "Create Game"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/TabContainer/ENET"]
+layout_mode = 2
+
+[node name="Edit_IP" type="LineEdit" parent="HBoxContainer/TabContainer/ENET"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "IP: 127.0.0.1"
+
+[node name="Button_Join" type="Button" parent="HBoxContainer/TabContainer/ENET"]
+layout_mode = 2
+text = "Join Game"
+
+[node name="Steam" type="VBoxContainer" parent="HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_tab_index = 1
+
+[node name="Edit_LobbyName" type="LineEdit" parent="HBoxContainer/TabContainer/Steam"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Lobby Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TabContainer/Steam"]
+layout_mode = 2
+
+[node name="Button_CreateLobby" type="Button" parent="HBoxContainer/TabContainer/Steam/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create Lobby"
+
+[node name="Option_LobbyType" type="OptionButton" parent="HBoxContainer/TabContainer/Steam/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 2
+item_count = 3
+popup/item_0/text = "Private"
+popup/item_0/id = 0
+popup/item_1/text = "Friends Only"
+popup/item_1/id = 1
+popup/item_2/text = "Public"
+popup/item_2/id = 2
+
+[node name="Button_Refresh" type="Button" parent="HBoxContainer/TabContainer/Steam"]
+layout_mode = 2
+text = "Refresh Lobbies"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/TabContainer/Steam"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container_Lobbies" type="VBoxContainer" parent="HBoxContainer/TabContainer/Steam/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scroll_LevelSelection" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="Container_LevelsButtons" type="VBoxContainer" parent="HBoxContainer/Scroll_LevelSelection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="HBoxContainer/TabContainer/ENET/Button_Create" to="." method="_on_button_create_pressed"]
+[connection signal="pressed" from="HBoxContainer/TabContainer/ENET/Button_Join" to="." method="_on_button_join_pressed"]
+[connection signal="pressed" from="HBoxContainer/TabContainer/Steam/HBoxContainer/Button_CreateLobby" to="." method="_on_button_create_lobby_pressed"]
+[connection signal="pressed" from="HBoxContainer/TabContainer/Steam/Button_Refresh" to="." method="_on_button_refresh_pressed"]

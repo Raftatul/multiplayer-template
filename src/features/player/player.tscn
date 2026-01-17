@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://701k78kygyiu"]
+
+[ext_resource type="Script" uid="uid://c8c8bvww5wvax" path="res://src/features/player/player.gd" id="1_0ph83"]
+[ext_resource type="PackedScene" uid="uid://mcb0ovo14n40" path="res://assets/PlayerCharacter/GodotPlush/godot_plush_model.glb" id="2_3v8pm"]
+[ext_resource type="Material" uid="uid://buh6uaww5rtsq" path="res://assets/PlayerCharacter/GodotPlush/Material/godot_plush_mat.tres" id="3_p2vpv"]
+[ext_resource type="PackedScene" uid="uid://bwccmirxmpnbb" path="res://src/ui/pause_menu/pause_menu.tscn" id="4_p2vpv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ph83"]
+height = 1.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0ph83"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Visual:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_0ph83")
+sensitivity = 0.25
+rotation_speed = 10.0
+acceleration = 0.5
+speed = 5.0
+jump_force = 6.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_0ph83")
+
+[node name="Visual" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="godot_plush_model" parent="Visual" instance=ExtResource("2_3v8pm")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="GodotPlushMesh" parent="Visual/godot_plush_model/Rig/Skeleton3D" index="0"]
+material_override = ExtResource("3_p2vpv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0ph83")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+unique_name_in_owner = true
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_p2vpv")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="Visual/godot_plush_model"]

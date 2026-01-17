@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b75a7qx0ntove"]
+
+[ext_resource type="Script" uid="uid://ir2i64rio2eu" path="res://src/main_scene.gd" id="1_yn12h"]
+[ext_resource type="PackedScene" uid="uid://d0kihwooakirn" path="res://src/levels/zoo.tscn" id="2_ualv7"]
+[ext_resource type="PackedScene" uid="uid://dqjwyswiidmrv" path="res://src/levels/level_01.tscn" id="3_6yb67"]
+[ext_resource type="PackedScene" uid="uid://bccc5i86a0w34" path="res://src/menu.tscn" id="4_hcawe"]
+
+[node name="MainScene" type="Node"]
+script = ExtResource("1_yn12h")
+start_levels = Array[PackedScene]([ExtResource("2_ualv7"), ExtResource("3_6yb67")])
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://d0kihwooakirn", "uid://dqjwyswiidmrv")
+spawn_path = NodePath(".")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://701k78kygyiu")
+spawn_path = NodePath(".")
+
+[node name="Menu" parent="." node_paths=PackedStringArray("main") instance=ExtResource("4_hcawe")]
+main = NodePath("..")
