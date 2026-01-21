@@ -24,10 +24,6 @@ Global="*res://src/modules/windows_placement/global.gd"
 
 run/main_run_args="--no-header"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/zylann.editor_debugger/plugin.cfg")
-
 [global_group]
 
 spawn_point=""
