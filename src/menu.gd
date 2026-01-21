@@ -45,8 +45,10 @@ func _on_button_join_pressed() -> void:
 
 
 func _on_button_create_lobby_pressed() -> void:
+	var lobby_name: String = "%s: %s" % [Steam.getPersonaName(), edit_lobby_name.text]
 	var data: Dictionary = {
-		"name": edit_lobby_name.text
+		"game": "multiplayer-template",
+		"name": lobby_name
 	}
 	MultiplayerBackend.create_lobby(option_lobby_type.selected, data)
 
@@ -55,7 +57,9 @@ func _on_button_refresh_pressed() -> void:
 	for child in container_lobbies.get_children():
 		child.queue_free()
 	
+	#Lobby filters
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	Steam.addRequestLobbyListStringFilter("game", "multiplayer-template", Steam.LobbyComparison.LOBBY_COMPARISON_EQUAL)
 	Steam.requestLobbyList()
 
 
