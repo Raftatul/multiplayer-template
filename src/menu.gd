@@ -36,6 +36,16 @@ func _populate_level_selection() -> void:
 			button.set_pressed_no_signal(true)
 
 
+func _refresh_lobbies() -> void:
+	for child in container_lobbies.get_children():
+		child.queue_free()
+	
+	#Lobby filters
+	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	Steam.addRequestLobbyListStringFilter("game", "multiplayer-template", Steam.LobbyComparison.LOBBY_COMPARISON_EQUAL)
+	Steam.requestLobbyList()
+
+
 func _on_button_create_pressed() -> void:
 	MultiplayerBackend.create_enet_host()
 
@@ -51,16 +61,6 @@ func _on_button_create_lobby_pressed() -> void:
 		"name": lobby_name
 	}
 	MultiplayerBackend.create_lobby(option_lobby_type.selected, data)
-
-
-func _on_button_refresh_pressed() -> void:
-	for child in container_lobbies.get_children():
-		child.queue_free()
-	
-	#Lobby filters
-	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
-	Steam.addRequestLobbyListStringFilter("game", "multiplayer-template", Steam.LobbyComparison.LOBBY_COMPARISON_EQUAL)
-	Steam.requestLobbyList()
 
 
 func _on_lobby_match_list(lobbies: Array) -> void:
@@ -85,3 +85,4 @@ func _on_lobby_match_list(lobbies: Array) -> void:
 func _on_visibility_changed() -> void:
 	if visible and is_node_ready():
 		_populate_level_selection()
+		_refresh_lobbies()

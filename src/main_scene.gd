@@ -126,6 +126,7 @@ func _on_server_leaved() -> void:
 		child.queue_free()
 	
 	menu.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	#Disconnect server signals
 	if multiplayer.peer_connected.has_connections():

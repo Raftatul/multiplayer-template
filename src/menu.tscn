@@ -113,4 +113,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="HBoxContainer/TabContainer/ENET/Button_Create" to="." method="_on_button_create_pressed"]
 [connection signal="pressed" from="HBoxContainer/TabContainer/ENET/Button_Join" to="." method="_on_button_join_pressed"]
 [connection signal="pressed" from="HBoxContainer/TabContainer/Steam/HBoxContainer/Button_CreateLobby" to="." method="_on_button_create_lobby_pressed"]
-[connection signal="pressed" from="HBoxContainer/TabContainer/Steam/Button_Refresh" to="." method="_on_button_refresh_pressed"]
+[connection signal="pressed" from="HBoxContainer/TabContainer/Steam/Button_Refresh" to="." method="_refresh_lobbies"]
