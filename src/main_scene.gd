@@ -56,12 +56,19 @@ func _add_player(id: int) -> void:
 	var spawn_pos: Vector3 = _get_spawn_point()
 	player.name = str(id)
 	player_spawner.add_child(player)
-	player.rpc_set_position.rpc(spawn_pos)
+	_rpc_set_player_position.rpc(player.get_path(), spawn_pos)
 
 
 func _remove_player(id: int) -> void:
 	if player_spawner.has_node(str(id)):
 		player_spawner.get_node(str(id)).queue_free()
+
+
+@rpc("any_peer", "call_local")
+func _rpc_set_player_position(path: NodePath, pos: Vector3) -> void:
+	var node: Node3D = get_tree().root.get_node(path)
+	if node:
+		node.global_position = pos
 
 
 #region Server

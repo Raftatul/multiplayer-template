@@ -65,8 +65,3 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector3(0.0, velocity.y, 0.0), acceleration)
 	
 	move_and_slide()
-
-
-@rpc("any_peer", "call_local")
-func rpc_set_position(pos: Vector3) -> void:
-	global_position = pos
