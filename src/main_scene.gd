@@ -55,6 +55,7 @@ func _add_player(id: int) -> void:
 	var player: Node3D = PLAYER.instantiate()
 	var spawn_pos: Vector3 = _get_spawn_point()
 	player.name = str(id)
+	player.peer_id = id
 	player_spawner.add_child(player)
 	_rpc_set_player_position.rpc(player.get_path(), spawn_pos)
 
