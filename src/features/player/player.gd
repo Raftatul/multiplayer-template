@@ -24,6 +24,8 @@ func _ready() -> void:
 	if get_multiplayer_authority() != 0 and not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
+		set_process_unhandled_input(false)
+		set_process_unhandled_key_input(false)
 		set_process_input(false)
 		camera.current = false
 	else:
